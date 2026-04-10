@@ -15,13 +15,14 @@ export default function Timeline({ items }) {
           {items.map((item, index) => (
             <Motion.article
               key={item.title}
-              className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-md"
+              className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-md transition-shadow duration-300 hover:shadow-[0_18px_40px_-24px_rgba(232,121,249,0.55)]"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.45, delay: index * 0.06 }}
+              whileHover={{ y: -3, borderColor: 'rgba(232,121,249,0.35)' }}
             >
-              <span className="absolute -left-[37px] top-6 h-3 w-3 rounded-full border border-fuchsia-300/50 bg-fuchsia-500 shadow-[0_0_0_6px_rgba(232,121,249,0.15)] sm:-left-[53px]" />
+              <span className="absolute -left-[34px] top-6 h-3 w-3 rounded-full border border-fuchsia-300/50 bg-fuchsia-500 shadow-[0_0_0_6px_rgba(232,121,249,0.15)] sm:-left-[46px]" />
               <p className="text-xs uppercase tracking-[0.18em] text-fuchsia-200/90">{item.period}</p>
               <h3 className="mt-2 text-lg font-semibold text-zinc-100">{item.title}</h3>
               <p className="mt-1 text-sm text-zinc-400">{item.subtitle}</p>

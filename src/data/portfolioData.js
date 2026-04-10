@@ -193,7 +193,7 @@ export const projects = [
     description:
       'A system built with Python, React, and Tailwind CSS that uses a trained Multi-Layer Perceptron (MLP) to recognize hand gestures and generate particle-based visual outputs.',
     overview:
-      'This section is ready for your full project narrative. Add architecture, model design, data flow, and implementation highlights here.',
+      'A gesture-recognition project that applies machine learning concepts using a Multi-Layer Perceptron (MLP) to classify hand inputs and drive interactive particle-based outputs. It demonstrates practical use of model behavior, feature mapping, and real-time response in a visual system.',
     challenges: ['[Add challenge here]', '[Add challenge here]', '[Add challenge here]'],
     outcomes: ['[Add outcome here]', '[Add outcome here]', '[Add outcome here]'],
     tech: ['Python', 'React', 'Tailwind CSS', 'Machine Learning', 'MLP'],
@@ -212,7 +212,7 @@ export const projects = [
     description:
       'An intelligent assistant system featuring machine learning-based facial recognition, voice authentication, and real-time control using computer vision and embedded systems.',
     overview:
-      'This section is ready for your full project narrative. Add architecture, modules, and hardware-software integration details here.',
+      'This project is a JARVIS-inspired intelligent system that combines computer vision, voice recognition, and hardware control. Built using Python and Arduino, it features face tracking, object detection, and voice command activation. The system includes advanced functionalities such as voice authentication, multiple operational modes (ENGAGE, STOP, OBJECT DETECTION, TARGET), and real-time servo motor control. It demonstrates strong integration between AI software and embedded hardware systems.',
     challenges: ['[Add challenge here]', '[Add challenge here]', '[Add challenge here]'],
     outcomes: ['[Add outcome here]', '[Add outcome here]', '[Add outcome here]'],
     tech: [
@@ -237,7 +237,7 @@ export const projects = [
     description:
       'An AI-powered coding assessment platform designed to improve grading efficiency and support academic integrity through automated evaluation workflows.',
     overview:
-      'This section is ready for your full project narrative. Add architecture, scoring pipeline, and workflow details here.',
+      'BitGrader is a web-based platform designed to automate the evaluation of programming tasks using artificial intelligence. The system enhances grading accuracy, reduces manual workload for educators, and promotes academic integrity through anti-cheating mechanisms such as activity monitoring and validation checks. It integrates front-end and back-end technologies to provide a seamless experience for both instructors and students.',
     challenges: ['[Add challenge here]', '[Add challenge here]', '[Add challenge here]'],
     outcomes: ['[Add outcome here]', '[Add outcome here]', '[Add outcome here]'],
     tech: ['AI', 'Full-Stack Development', 'Web Platform', 'Database'],
@@ -256,7 +256,7 @@ export const projects = [
     description:
       'An IoT-based system for monitoring environmental conditions and supporting smart agriculture workflows through sensors and automation.',
     overview:
-      'This section is ready for your full project narrative. Add sensor stack, automation rules, and reliability details here.',
+      'An IoT-based system that monitors and manages environmental conditions inside a greenhouse. Using ESP32, the system can collect data such as temperature and humidity and automate responses to optimize plant growth. This project highlights skills in sensor integration, microcontroller programming, and real-time automation.',
     challenges: ['[Add challenge here]', '[Add challenge here]', '[Add challenge here]'],
     outcomes: ['[Add outcome here]', '[Add outcome here]', '[Add outcome here]'],
     tech: ['Arduino or ESP32', 'Sensors', 'IoT', 'Automation'],
@@ -275,7 +275,7 @@ export const projects = [
     description:
       'An automated drying system using infrared heating and a conveyor mechanism to improve rice post-harvest processing efficiency.',
     overview:
-      'This section is ready for your full project narrative. Add mechanical integration and automation logic details here.',
+      'This system is designed to improve the efficiency of drying rice paddy using infrared light and controlled airflow. An Arduino-based controller regulates the speed of a conveyor belt to ensure consistent drying within a short time. The project focuses on enhancing agricultural productivity by reducing drying time and improving grain quality through automation and controlled processing.',
     challenges: ['[Add challenge here]', '[Add challenge here]', '[Add challenge here]'],
     outcomes: ['[Add outcome here]', '[Add outcome here]', '[Add outcome here]'],
     tech: ['Arduino', 'IR Heating', 'Conveyor Mechanism', 'Embedded Systems'],
@@ -294,7 +294,7 @@ export const projects = [
     description:
       'A web-based appointment and consultation platform with scheduling and calendar integration, designed to support healthcare coordination.',
     overview:
-      'This section is ready for your full project narrative. Add scheduling architecture and database workflow details here.',
+      'A full-stack web application that enables patients to book and manage consultations with doctors. It includes features such as calendar-based scheduling, appointment tracking, and user-specific access control. Built using HTML, CSS, PHP, and MySQL, the system demonstrates strong backend integration and database management, along with an intuitive user interface for both patients and healthcare providers.',
     challenges: ['[Add challenge here]', '[Add challenge here]', '[Add challenge here]'],
     outcomes: ['[Add outcome here]', '[Add outcome here]', '[Add outcome here]'],
     tech: ['React', 'Tailwind CSS', 'PHP or Flask', 'MySQL', 'Scheduling System'],
@@ -354,16 +354,76 @@ export const timelineItems = [
 
 export const certifications = [
   {
+    title: 'BitGrader - 2nd Place Best in Design Project',
+    issuer: 'Wesleyan University-Philippines',
+    year: '2026',
+    category: 'Engineering',
+    description:
+      'Awarded to our team for BitGrader after being recognized as 2nd Place Best in Design Project in our batch, highlighting product thinking, design quality, and technical execution.',
+    link: '',
+  },
+  {
+    title: 'Technical Consultant - National Science and Engineering Fair (NSEF) 2025',
+    issuer: 'National Science and Engineering Fair',
+    year: '2025',
+    category: 'Engineering',
+    description:
+      'Contributed to a capstone project recognized as a Finalist in the National Science and Engineering Fair (NSEF) 2025.',
+    link: '',
+  },
+  {
+    title: 'DICT Regional Recognition - Online Health Consultation Application',
+    issuer: 'DICT Regional Office',
+    year: '2025',
+    category: 'Health Tech',
+    description:
+      'Recognized for contributions in the development of an Online Health Consultation Application under the SMART Village Project, supporting digital healthcare accessibility.',
+    link: '',
+  },
+  {
+    title: 'Launchpad Sulong 2025 - Ginhawa (Top 10 Finalist)',
+    issuer: 'Launchpad Sulong',
+    year: '2025',
+    category: 'Startup',
+    description:
+      'Selected as a Top 10 Finalist for Ginhawa in Launchpad Sulong 2025, highlighting innovation and startup potential.',
+    link: '',
+  },
+  {
+    title: 'Philippine Startup Challenge X - Regional Pitching Competition',
+    issuer: 'Philippine Startup Challenge X',
+    year: '2025',
+    category: 'Startup',
+    description:
+      'Represented Wesleyan University-Philippines in the regional stage of the Philippine Startup Challenge X with Ginhawa, showcasing a technology-driven solution.',
+    link: '',
+  },
+  {
+    title: 'STEP-UP Central Luzon - Ginhawa Recognition',
+    issuer: 'STEP-UP Central Luzon',
+    year: '2025',
+    category: 'Startup',
+    description:
+      'Recognized for successful completion of the Startup-Tailored Empowerment and People-Focused Upskilling Program (STEP-UP Central Luzon), focused on innovation and startup development.',
+    link: '',
+  },
+  {
     title: 'Certificate of Recognition for Ginhawa System',
     issuer: 'Provincial DICT Head',
     year: '2025',
-    link: '[PUT LINK IF AVAILABLE]',
+    category: 'Engineering',
+    description:
+      'Received recognition for technical contribution and collaboration in the development and presentation of the Ginhawa system.',
+    link: '',
   },
   {
     title: 'Promising Student Leader Award',
-    issuer: '[PUT ISSUER IF APPLICABLE]',
-    year: '[PUT YEAR]',
-    link: '[PUT LINK IF AVAILABLE]',
+    issuer: "Student Leaders' Night",
+    year: '2023',
+    category: 'Leadership',
+    description:
+      'Recognized for leadership, initiative, and contribution to student-led programs and university activities.',
+    link: '',
   },
 ]
 

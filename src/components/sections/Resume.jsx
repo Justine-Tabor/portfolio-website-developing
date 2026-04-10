@@ -2,6 +2,14 @@ import { motion as Motion } from 'framer-motion'
 import { Download, ShieldCheck } from 'lucide-react'
 import SectionHeading from '../ui/SectionHeading'
 
+const isRealLink = (value) => {
+  const link = value?.trim()
+  if (!link) {
+    return false
+  }
+  return !link.includes('[PUT') && !link.includes('PLACEHOLDER')
+}
+
 export default function Resume({ resumeLink, certifications }) {
   return (
     <section id="resume" className="scroll-mt-28 px-6 py-20">
@@ -37,7 +45,7 @@ export default function Resume({ resumeLink, certifications }) {
           {certifications.map((cert, index) => (
             <Motion.article
               key={cert.title}
-              className="rounded-2xl border border-white/10 bg-white/[0.03] p-5"
+              className="rounded-2xl border border-white/15 bg-white/[0.04] p-5 shadow-[0_20px_45px_-28px_rgba(232,121,249,0.5)] backdrop-blur-md"
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
@@ -48,9 +56,23 @@ export default function Resume({ resumeLink, certifications }) {
               </div>
               <h4 className="text-sm font-semibold text-zinc-100">{cert.title}</h4>
               <p className="mt-2 text-xs uppercase tracking-[0.12em] text-zinc-400">
-                {cert.issuer} · {cert.year}
+                {cert.issuer} | {cert.year}
               </p>
-              <p className="mt-2 text-xs text-zinc-400">{cert.link}</p>
+              {cert.description ? (
+                <p className="mt-2 overflow-hidden text-sm leading-relaxed text-zinc-300 [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]">
+                  {cert.description}
+                </p>
+              ) : null}
+              {isRealLink(cert.link) ? (
+                <a
+                  href={cert.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-2 inline-flex text-xs text-cyan-300 hover:text-cyan-200"
+                >
+                  View Credential
+                </a>
+              ) : null}
             </Motion.article>
           ))}
         </div>
@@ -58,4 +80,3 @@ export default function Resume({ resumeLink, certifications }) {
     </section>
   )
 }
-

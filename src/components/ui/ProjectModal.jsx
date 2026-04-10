@@ -2,6 +2,14 @@ import { useEffect } from 'react'
 import { AnimatePresence, motion as Motion } from 'framer-motion'
 import { ExternalLink, FolderGit2, X } from 'lucide-react'
 
+const isRealLink = (value) => {
+  const link = value?.trim()
+  if (!link) {
+    return false
+  }
+  return !link.includes('[PUT') && !link.includes('PLACEHOLDER')
+}
+
 export default function ProjectModal({ project, onClose }) {
   useEffect(() => {
     if (!project) {
@@ -132,24 +140,28 @@ export default function ProjectModal({ project, onClose }) {
               </div>
 
               <div className="flex gap-3 pt-1">
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-zinc-100 transition hover:border-fuchsia-400/50 hover:bg-fuchsia-500/10"
-                >
-                  <FolderGit2 className="h-4 w-4" />
-                  GitHub
-                </a>
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-zinc-100 transition hover:border-cyan-400/45 hover:bg-cyan-500/10"
-                >
-                  <ExternalLink className="h-4 w-4" />
-                  Live Demo
-                </a>
+                {isRealLink(project.github) ? (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-zinc-100 transition hover:border-fuchsia-400/50 hover:bg-fuchsia-500/10"
+                  >
+                    <FolderGit2 className="h-4 w-4" />
+                    GitHub
+                  </a>
+                ) : null}
+                {isRealLink(project.demo) ? (
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-zinc-100 transition hover:border-cyan-400/45 hover:bg-cyan-500/10"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    Live Demo
+                  </a>
+                ) : null}
               </div>
             </div>
           </Motion.article>
