@@ -14,7 +14,7 @@ export default function Footer({ name, socialLinks, quickLinks }) {
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 py-8 text-center sm:text-left">
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           <p className="text-sm text-zinc-400">
-            © {year} {name}. Built with React + Tailwind.
+            © {year} {name}.
           </p>
           <div className="flex flex-wrap items-center gap-2">
             {quickLinks.map((link) => (
