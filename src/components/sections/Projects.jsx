@@ -55,7 +55,11 @@ export default function Projects({ projectItems }) {
           ))}
         </div>
       </div>
-      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+      <ProjectModal
+        key={selectedProject?.title ?? 'no-project-selected'}
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </section>
   )
 }

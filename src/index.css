@@ -32,3 +32,18 @@ body {
     @apply inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-5 py-3 text-sm font-medium text-zinc-100 transition hover:border-white/30 hover:bg-white/[0.07] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-300/45;
   }
 }
+
+/* Reduce navbar-to-hero gap while keeping fixed-nav layout responsive. */
+header.fixed {
+  margin-bottom: 0;
+}
+
+#home {
+  margin-top: 0;
+  padding-top: clamp(5.5rem, 9vw, 7rem);
+}
+
+#home h1,
+#home h2 {
+  margin-top: 0;
+}

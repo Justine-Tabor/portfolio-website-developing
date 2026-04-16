@@ -1,24 +1,62 @@
-import { motion as Motion } from 'framer-motion'
+import { AnimatePresence, motion as Motion } from 'framer-motion'
+import { useMemo, useState } from 'react'
 import {
   ArrowRight,
   BriefcaseBusiness,
+  Check,
+  Copy,
   Download,
-  FolderGit2,
   Mail,
+  Phone,
 } from 'lucide-react'
 
 const socialIconMap = {
-  github: FolderGit2,
   linkedin: BriefcaseBusiness,
   mail: Mail,
+  phone: Phone,
 }
 
 export default function Hero({ profile, socialLinks, tools, ctas }) {
+  const [expandedContact, setExpandedContact] = useState(null)
+  const [copiedContact, setCopiedContact] = useState(null)
+
   const photoSrc = profile.photo
     ? profile.photo.startsWith('http') || profile.photo.startsWith('/')
       ? profile.photo
       : `/${profile.photo}`
     : null
+
+  const isPlaceholder = (value) => value?.includes('[PUT')
+
+  const heroContacts = useMemo(() => {
+    const linkedIn = socialLinks.find((item) => item.type === 'linkedin')
+    const email = socialLinks.find((item) => item.type === 'mail')
+    return [
+      { label: 'Phone', type: 'phone', href: '', value: profile.phone },
+      ...(linkedIn ? [linkedIn] : []),
+      ...(email ? [email] : []),
+    ]
+  }, [profile.phone, socialLinks])
+
+  const toggleContact = (type) => {
+    setExpandedContact((prev) => (prev === type ? null : type))
+  }
+
+  const handleCopy = async (event, type, value) => {
+    event.stopPropagation()
+    if (!value || isPlaceholder(value)) {
+      return
+    }
+    try {
+      await navigator.clipboard.writeText(value)
+      setCopiedContact(type)
+      window.setTimeout(() => {
+        setCopiedContact((current) => (current === type ? null : current))
+      }, 1200)
+    } catch {
+      setCopiedContact(null)
+    }
+  }
 
   return (
     <section id="home" className="relative scroll-mt-28 px-6 pt-32 pb-20 sm:pt-36">
@@ -53,6 +91,8 @@ export default function Hero({ profile, socialLinks, tools, ctas }) {
               <a
                 key={cta.label}
                 href={cta.href}
+                target={cta.label.toLowerCase().includes('resume') ? '_blank' : undefined}
+                rel={cta.label.toLowerCase().includes('resume') ? 'noreferrer' : undefined}
                 className={cta.type === 'primary' ? 'btn-primary' : 'btn-secondary'}
               >
                 {cta.label}
@@ -66,23 +106,75 @@ export default function Hero({ profile, socialLinks, tools, ctas }) {
             ))}
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
-            {socialLinks.map((link) => {
-              const Icon = socialIconMap[link.type] ?? FolderGit2
+          <Motion.div layout className="flex flex-wrap items-center gap-3">
+            {heroContacts.map((item) => {
+              const Icon = socialIconMap[item.type] ?? Mail
+              const isPhone = item.type === 'phone'
+              const isEmail = item.type === 'mail'
+              const isExpandable = isPhone || isEmail
+              const isExpanded = isExpandable ? expandedContact === item.type : false
+              const displayValue = isPhone ? profile.phone : item.href?.replace(/^mailto:/, '')
+
+              if (item.type === 'linkedin') {
+                return (
+                  <Motion.a
+                    layout
+                    transition={{ type: 'spring', stiffness: 340, damping: 30 }}
+                    key={item.label}
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl border border-white/12 bg-white/[0.03] px-3 py-2 text-sm text-zinc-200 transition hover:border-fuchsia-400/45 hover:text-zinc-100"
+                  >
+                    <Icon className="h-4 w-4" />
+                    {item.label}
+                  </Motion.a>
+                )
+              }
+
               return (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noreferrer"
+                <Motion.button
+                  layout
+                  transition={{ type: 'spring', stiffness: 340, damping: 30 }}
+                  type="button"
+                  key={item.label}
+                  onClick={() => toggleContact(item.type)}
                   className="inline-flex items-center gap-2 rounded-xl border border-white/12 bg-white/[0.03] px-3 py-2 text-sm text-zinc-200 transition hover:border-fuchsia-400/45 hover:text-zinc-100"
                 >
-                  <Icon className="h-4 w-4" />
-                  {link.label}
-                </a>
+                  <Icon className="h-4 w-4 shrink-0" />
+                  <span className="whitespace-nowrap">{item.label}</span>
+                  <AnimatePresence initial={false}>
+                    {isExpanded && displayValue && !isPlaceholder(displayValue) ? (
+                      <Motion.span
+                        key={`${item.type}-value`}
+                        initial={{ width: 0, opacity: 0 }}
+                        animate={{ width: 'auto', opacity: 1 }}
+                        exit={{ width: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: 'easeOut' }}
+                        className="overflow-hidden whitespace-nowrap text-zinc-100/90"
+                      >
+                        <span className="ml-2 inline-flex items-center gap-2">
+                          {displayValue}
+                          <button
+                            type="button"
+                            onClick={(event) => handleCopy(event, item.type, displayValue)}
+                            aria-label={`Copy ${item.label}`}
+                            className="inline-flex rounded-md border border-white/15 bg-white/5 p-1 text-zinc-200 transition hover:border-fuchsia-400/45 hover:text-zinc-100"
+                          >
+                            {copiedContact === item.type ? (
+                              <Check className="h-3.5 w-3.5" />
+                            ) : (
+                              <Copy className="h-3.5 w-3.5" />
+                            )}
+                          </button>
+                        </span>
+                      </Motion.span>
+                    ) : null}
+                  </AnimatePresence>
+                </Motion.button>
               )
             })}
-          </div>
+          </Motion.div>
 
           <div className="flex flex-wrap gap-2">
             {tools.map((tool) => (

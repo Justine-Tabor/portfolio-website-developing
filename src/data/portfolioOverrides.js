@@ -31,7 +31,18 @@ const toProjectImagePath = (value) => {
   if (trimmed.startsWith('/')) {
     return trimmed
   }
-  return `/projects/${trimmed}`
+  return `/${trimmed}`
+}
+
+const normalizeWebUrl = (value) => {
+  const normalized = value?.replace(/\s+/g, '').trim()
+  if (!normalized) {
+    return ''
+  }
+  if (normalized.startsWith('http://') || normalized.startsWith('https://')) {
+    return normalized
+  }
+  return `https://${normalized}`
 }
 
 export function getDefaultAdminOverrides() {
@@ -133,10 +144,15 @@ export function getPortfolioDataWithOverrides(overrides = getDefaultAdminOverrid
   }
 
   if (profileOverrides.linkedin) {
-    data.profile.linkedin = profileOverrides.linkedin
+    const normalizedLinkedIn = normalizeWebUrl(profileOverrides.linkedin)
+    data.profile.linkedin = normalizedLinkedIn
     const linkedInSocial = data.socialLinks.find((item) => item.type === 'linkedin')
     if (linkedInSocial) {
-      linkedInSocial.href = profileOverrides.linkedin
+      linkedInSocial.href = normalizedLinkedIn
+    }
+    const linkedInCard = data.contactCards.find((item) => item.label === 'LinkedIn')
+    if (linkedInCard) {
+      linkedInCard.value = normalizedLinkedIn
     }
   }
 

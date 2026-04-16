@@ -26,7 +26,7 @@ export default function Footer({ name, socialLinks, quickLinks }) {
         </div>
 
         <div className="flex items-center justify-center gap-2 sm:justify-start">
-          {socialLinks.map((item) => {
+          {socialLinks.filter((item) => item.type !== 'github').map((item) => {
             const Icon = socialIconMap[item.type] ?? FolderGit2
             return (
               <a
@@ -46,4 +46,3 @@ export default function Footer({ name, socialLinks, quickLinks }) {
     </footer>
   )
 }
-

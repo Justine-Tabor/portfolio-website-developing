@@ -1,6 +1,36 @@
 import { motion as Motion } from 'framer-motion'
 import { Star } from 'lucide-react'
 
+const isRealImagePath = (value) => {
+  const path = value?.trim()
+  if (!path) {
+    return false
+  }
+  return !path.includes('[PUT') && !path.includes('PLACEHOLDER')
+}
+
+const withAlternateProjectsPath = (path) => {
+  if (!path?.startsWith('/projects/')) {
+    return null
+  }
+  return path.replace('/projects/', '/')
+}
+
+const handleImageError = (event) => {
+  const img = event.currentTarget
+  if (img.dataset.fallbackTried === 'true') {
+    img.style.display = 'none'
+    return
+  }
+  const fallback = withAlternateProjectsPath(img.getAttribute('src') || '')
+  if (!fallback) {
+    img.style.display = 'none'
+    return
+  }
+  img.dataset.fallbackTried = 'true'
+  img.src = fallback
+}
+
 export default function ProjectCard({ project, index, onOpen }) {
   return (
     <Motion.article
@@ -18,6 +48,16 @@ export default function ProjectCard({ project, index, onOpen }) {
         aria-label={`Open project details for ${project.title}`}
       >
         <div className="relative mb-5 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-fuchsia-500/20 via-violet-500/15 to-cyan-400/10 p-6">
+          {isRealImagePath(project.coverImage) ? (
+            <img
+              src={project.coverImage}
+              alt={`${project.title} cover`}
+              className="absolute inset-0 h-full w-full object-cover"
+              loading="lazy"
+              onError={handleImageError}
+            />
+          ) : null}
+          <div className="absolute inset-0 bg-black/35" />
           <div className="absolute inset-0 scale-110 bg-[radial-gradient(circle_at_top_right,rgba(232,121,249,0.3),transparent_40%)] transition duration-500 group-hover:scale-125" />
           <div className="relative flex h-32 items-end justify-between">
             <span className="rounded-full border border-white/20 bg-black/30 px-3 py-1 text-xs uppercase tracking-[0.18em] text-zinc-200">
@@ -37,9 +77,9 @@ export default function ProjectCard({ project, index, onOpen }) {
           <p className="text-sm leading-relaxed text-zinc-300">{project.description}</p>
 
           <div className="flex flex-wrap gap-2">
-            {project.tech.map((item) => (
+            {project.tech.map((item, techIndex) => (
               <span
-                key={item}
+                key={`${item}-${techIndex}`}
                 className="rounded-full border border-white/10 bg-zinc-900/70 px-3 py-1 text-xs text-zinc-300 transition group-hover:border-fuchsia-400/45"
               >
                 {item}
@@ -57,4 +97,3 @@ export default function ProjectCard({ project, index, onOpen }) {
     </Motion.article>
   )
 }
-
