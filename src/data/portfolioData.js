@@ -4,7 +4,7 @@ export const navConfig = {  logo: 'JMT',  ctaText: 'Lets Connect',  ctaTarget: '
 
 export const navLinks = [  { id: 'home', label: 'Home' },  { id: 'about', label: 'About' },  { id: 'expertise', label: 'Expertise' },  { id: 'skills', label: 'Skills' },  { id: 'projects', label: 'Projects' },  { id: 'experience', label: 'Experience' },  { id: 'resume', label: 'Resume' },  { id: 'contact', label: 'Contact' },]
 
-export const heroCtas = [  { label: 'View Projects', href: '#projects', type: 'primary' },  { label: 'Download Resume', href: 'https://drive.google.com/file/d/19SlM8FCkOtNq3YKl0ZkAF_i78h1ojYtL/view?usp=sharing', type: 'secondary' },  { label: 'Contact Me', href: '#contact', type: 'secondary' },]
+export const heroCtas = [  { label: 'View Projects', href: '#projects', type: 'primary' },  { label: 'Download Resume', href: 'https://drive.google.com/file/d/1e_28knKjlutzyao9IGvMsUMCFg0HOU91/view?usp=sharing', type: 'secondary' },  { label: 'Contact Me', href: '#contact', type: 'secondary' },]
 
 export const socialLinks = [  { label: 'GitHub', href: '[PUT GITHUB URL HERE]', type: 'github' },  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/justine-michael-tabor-b23b1a317', type: 'linkedin' },  { label: 'Email', href: 'mailto:taborjustinemike@gmail.com', type: 'mail' },]
 
